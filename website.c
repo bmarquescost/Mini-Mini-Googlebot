@@ -28,19 +28,44 @@ WEBSITE *website_criar(){
     return novo_site;
 }
 
+boolean website_deletar(WEBSITE **site){
+    if(site == NULL){
+        printf("Site não existe\n");
+        return FALSE;
+    }
+    if(*site == NULL){
+        printf("Site sem informações\n");
+        return FALSE;
+    }
+    free((*site)->url);
+    (*site)->url = NULL;
+
+    free((*site)->nome);
+    (*site)->nome = NULL;
+    
+    for(int i = 0; i < (*site)->num_palavras_chave; ++i){
+        free((*site)->palavras_chaves[i]);
+        (*site)->palavras_chaves[i] = NULL;
+    }
+
+    free((*site)->palavras_chaves);
+    (*site)->palavras_chaves = NULL;
+    
+    free((*site));
+    *site = NULL;
+
+    return TRUE;
+}
+
 boolean website_insere_nome(WEBSITE *site, char *nome){
     
     if(site == NULL || nome == NULL){
         printf("Impossível inserir no campo nome: site ou nome inexistentes\n");
         return FALSE;
     }
-
-    int tamanho_nome = strlen(nome) + 1;
-    site->nome = calloc(tamanho_nome, sizeof(char));
-
-    for(int i = 0; i < tamanho_nome; ++i)
-        site->nome[i] = nome[i];
     
+    site->nome = nome;
+
     if(site->nome == NULL) return FALSE;
     
     return TRUE;
@@ -60,12 +85,8 @@ boolean website_insere_url(WEBSITE *site, char *url){
         printf("Impossível inserir no campo url: site ou url inexistentes\n");
         return FALSE;
     }
-
-    int tamanho_url = strlen(url) + 1;
-    site->url = calloc(tamanho_url, sizeof(char));
-
-    for(int i = 0; i < tamanho_url; ++i)
-        site->url[i] = url[i];
+        
+    site->url = url;
     
     if(site->url == NULL) return FALSE;
     
@@ -98,3 +119,69 @@ int website_consulta_relevancia(WEBSITE *site){
     return site->relevancia;
 }
 
+boolean website_insere_codigo(WEBSITE *site, int codigo){
+
+    if(site == NULL){
+        printf("Website inexsitente\n");
+        return FALSE;
+    }
+    site->codigo = codigo;
+    return TRUE;
+}
+
+int website_consulta_codigo(WEBSITE *site){
+    if(site == NULL){
+        printf("Impossível buscar código do site (site inexistente)\n");
+        return ERRO;
+    }
+    return site->codigo;
+}
+
+boolean website_insere_palavra_chave(WEBSITE *site, char *palavra_chave){
+    if(site == NULL || palavra_chave == NULL){
+        printf("Impossível inserir palavra chave no site solicitado\n");
+        return FALSE;
+    }
+
+    if(site->num_palavras_chave < 10){
+       
+        site->palavras_chaves = realloc(site->palavras_chaves, (site->num_palavras_chave + 1) * sizeof(char*));
+        
+        site->palavras_chaves[site->num_palavras_chave] = palavra_chave;
+            
+        ++site->num_palavras_chave;
+        
+        return TRUE;
+    }
+
+    printf("Número de palavras chave não pode ser maior que 10\n");
+    return FALSE;
+}
+
+int website_consulta_num_palavras_chave(WEBSITE *site){
+    if(site == NULL){
+        printf("Site inexistente, não é possível acessar o número de palavras chave\n");
+        return FALSE;
+    }
+    return site->num_palavras_chave;
+}
+
+void mostrar_site(WEBSITE *site){
+    if(site == NULL)
+        printf("Site inexistente, não existe informações a serem mostradas.\n");
+    else {
+        printf("-------------------------------------");   
+        printf("\nDados de %s:\n", site->nome);
+        printf("Nome: %s\n", site->nome);
+        printf("URL: %s\n", site->url);
+        printf("Código: %d\n", site->codigo);
+        printf("Relevância: %d\n", site->relevancia);
+        printf("Palavras-chave:\n");
+        
+        for(int i = 0; i < site->num_palavras_chave; i++)
+            printf("\t[%d] - %s\n", i, site->palavras_chaves[i]);
+        printf("-------------------------------------\n");   
+        
+    }
+    printf("\n");
+}
