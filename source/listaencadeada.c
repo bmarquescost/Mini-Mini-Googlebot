@@ -119,8 +119,8 @@ boolean lista_inserir(LISTA *lista, WEBSITE *site) {
     NO *no_novo = criar_no(site); 
     
     if(lista->num_nos == 0) {
-        no_novo->proximo = lista->inicio;
         lista->inicio = no_novo;
+        no_novo->proximo = NULL;
     }
 
     else {
@@ -130,8 +130,9 @@ boolean lista_inserir(LISTA *lista, WEBSITE *site) {
         int codigo_site = website_consulta_codigo(site);
         int codigo_atual = website_consulta_codigo(atual->site);
         
-        while(atual != NULL && codigo_site > codigo_atual) {
-            codigo_atual = website_consulta_codigo(atual->site);
+        while(atual != NULL){
+            codigo_atual = website_consulta_codigo(atual->site);   
+            if(codigo_site < codigo_atual) break;
             anterior = atual;
             atual = atual->proximo;
         }

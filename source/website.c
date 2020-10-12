@@ -246,18 +246,18 @@ void mostrar_site(WEBSITE *site){
     if(site == NULL)
         printf("Site inexistente, não existe informações a serem mostradas.\n");
     else {
-        printf("---------------------------------------------------------------");   
-        printf("\nDados de %s:\n", site->nome);
-        printf("Nome: %s\n", site->nome);
-        printf("URL: %s\n", site->url);
-        printf("Código: %d\n", site->codigo);
-        printf("Relevância: %d\n", site->relevancia);
-        printf("Palavras-chave:\n");
+        printf("\n");
+        //printf("---------------------------------------------------------------\n");   
+        printf("| Dados de %s:\n", site->nome);
+        printf("| Nome: %s\n", site->nome);
+        printf("| URL: %s\n", site->url);
+        printf("| Código: %d\n", site->codigo);
+        printf("| Relevância: %d\n", site->relevancia);
+        printf("| Palavras-chave:\n");
         
-        for(int i = 0; i < site->num_palavras_chave; i++)
-            printf("\t[%d] - %s\n", i, site->palavras_chaves[i]);
-        printf("---------------------------------------------------------------\n");   
-        
+        for(int i = 1; i <= site->num_palavras_chave; i++)
+            printf("| \t[%d] - %s\n", i, site->palavras_chaves[i - 1]);
+        //printf("---------------------------------------------------------------\n");   
     }
     printf("\n");
 }

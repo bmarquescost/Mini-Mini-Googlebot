@@ -1,0 +1,8 @@
+1,spotify,870,https://www.spotify.com/br/,musica,volume,festa,curticao
+3,youtube,920,https://www.youtube.com,videos,youtubers,curitdas,sininho,deixa o like
+10,instagram,860,https://www.instagram.com/,fotos,likes,sigodevolta,blogueirah
+2,facebook,820,https://www.facebook.com/,azul,familia tradicional,mark zuckerberg
+4,twitter,950,https://www.twitter.com.br/,passarinho azul,desabafo,exposed,cancelamento,hashtag
+6,twitch,800,https://www.twitch.tv/,streamer,csgo,league of legends,entretenimento,followers,subscribe,pontos,roxo,campeonatos,ligas
+7,github,10000,https://github.com,desenvolvimento,opensource,compartilhamento,comunidade,commit,add,push,pull,pull request
+10,notion,999,https://notion.so,organização pessoal,calendario,notebook,recomendo

@@ -86,9 +86,9 @@ void inserir_site(LISTA *lista){
         if(codigo == -1) return;
     }
 
-    while(codigo <= 0){
-        printf("O codigo deve ser um número maior que 0.\n");
-        printf("Digite novamente (ou digite -1 para cancelar a inserção):   ");
+    while(codigo < 0 || codigo >= 10000){
+        printf("O código deve ser um número entre 0 e 9999.\n");
+        printf("Digite novamente (-1 para cancelar a inserção):   ");
         scanf("%d", &codigo);
         getchar();
         if(codigo == -1) return;
@@ -291,7 +291,7 @@ void executa_programa(LISTA *lista){
     
 
         else if(escolha == MOSTRA_LISTA){
-            printf("\nVocê escolheu mostrar os sites:\n");
+            printf("\n\nVocê escolheu mostrar os sites:\n");
             lista_mostrar(lista);
             printf("\n");
         }

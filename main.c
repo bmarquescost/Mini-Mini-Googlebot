@@ -23,7 +23,7 @@
 int main(int argc, char *argv[]){
     // imprimindo o cabeçalho do programa
     printf("______________________________________________________________\n");
-    printf("\n\t\t\tGOOGLEBOT\n");
+    printf("\n                       GOOGLEBOT                            \n");
     printf("______________________________________________________________\n\n");
     
     // Leitura do arquivo padrão "googlebot.txt"
