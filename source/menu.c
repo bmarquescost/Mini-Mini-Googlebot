@@ -1,3 +1,13 @@
+/*
+    SCC0202 - ALGORITMOS E ESTRUTURAS DE DADOS I
+    Docente: Rudinei Goulart 
+
+    Aluno: Bernardo Marques Costa                    Número USP: 11795551
+    Aluno: Fernando Henrique Paes Generich           Número USP: 11795342
+
+    MINI GOOGLEBOT 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,6 +16,7 @@
 #include "util.h"
 #include "listaencadeada.h"
 
+// Enumeração para facilitar a chamada das funções
 enum comando { INSERIR_SITE = 0, REMOVER, INSERIR_PALAVRA, ATUALIZAR_RELEVANCIA, MOSTRA_LISTA, LER_CSV, SAIR};
 
 void imprime_menu(){
@@ -21,6 +32,13 @@ void imprime_menu(){
     printf("_______________________________________________________________\n");
 }
 
+/*
+    Função cria_site_insere_na_lista:
+    Recebe como parâmetro a lista e todos os valores necessários para construir uma variável do tipo
+    struct WEBSITE.
+    Cria um novo site, adicionando-o na lista
+    Retorna se a execução foi bem sucedida e falso se houve algum erro durante execução do código.
+*/
 boolean cria_site_insere_na_lista(LISTA *l, int codigo, char *nome,  char *url, int relevancia, char **pc, int n_pc){
     if(l == NULL) {
         printf("Lista inexistente\n");
@@ -47,14 +65,19 @@ boolean cria_site_insere_na_lista(LISTA *l, int codigo, char *nome,  char *url, 
 
 }
 
+/*
+    Função inserir_site:
+    Recebe como parâmetro a lista em que será inserido o novo site.
+    Recebe pelo stdin todas as informações necessárias para que o usuário insira um novo website na lista.
+*/
 void inserir_site(LISTA *lista){
     printf("\n\nVocê escolheu inserir um novo site\n");
-    printf("Digite o código do site: ");
     
+    printf("Digite o código do site: ");
     int codigo;
     scanf("%d", &codigo);
     getchar();
-    
+
     while(lista_procurar_codigo(lista, codigo)){
         printf("Código já existente, não é possível adicionar site com mesmo código.\n");
         printf("Digite um novo código (ou digite -1 para cancelar a inserção): ");
@@ -114,14 +137,21 @@ void inserir_site(LISTA *lista){
         printf("Algum dado pode ter sido perdido.\n");
     }
     
-    free(palavras_chaves);
-    
+    free(palavras_chaves); // Como perdemos a referência para o ponteiro inicial, devemos dar free
+
+    // Mostrando o site inserido  
     WEBSITE* s = lista_busca(lista,codigo);
     mostrar_site(s);
     printf("\n");
 
 }
 
+/*
+    Função remover_site:
+    Recebe como parâmetro a lista em que será removido um site a partir de um código especificado pelo 
+    usuário.
+    Procura pelo código na lista, removendo-o caso o encontre.
+*/
 void remover_site(LISTA *lista){
     printf("\n\nVocê escolheu remover um site da lista\n");
     printf("Digite o código do site que deseja remover: ");
@@ -135,6 +165,12 @@ void remover_site(LISTA *lista){
     printf("Erro ao remover site: código não encontrado\n\n");
 }
 
+/*
+    Função inserir_palavra_chave:
+    Recebe como parâmetro a lista.
+    A partir do código fornecido pelo usuário e verificado a existencia de um site com aquela chave, 
+    é realizada a inserção da mais uma palavra chave (lembrando do máximo permitido de 10 palavras)
+*/
 void inserir_palavra_chave(LISTA *lista){
     printf("\n\nVocê selecionou inserir uma palavra-chave\n");
     printf("Digite qual o código do site em que deseja inserir a nova palavra: ");
@@ -163,6 +199,12 @@ void inserir_palavra_chave(LISTA *lista){
     printf("\n");
 }
 
+/*
+    Função atualizar_relevancia:
+    Recebe como parâmetro a lista.
+    A partir do código de um site e verificado a existencia deste na lista, é alterado o valor da relevância
+    por um valor desejado pelo usuário.
+*/
 void atualizar_relevancia(LISTA *lista){
     printf("\nVocê escolheu atualizar a relevância de um site na lista.\n");
     printf("Digite o código do site que deseja atualizar a relevancia: ");
@@ -194,6 +236,11 @@ void atualizar_relevancia(LISTA *lista){
         printf("Falha na inserção da relevância do site desejado\n\n");
 }
 
+/*
+    Função carrega_dados_csv:
+    Realiza a leitura de dados a partir de um arquivo no formato CSV fornecido pelo usuário, carregando
+    as informações obtidas para a lista.
+*/
 void carrega_dados_csv(LISTA *lista){
     printf("\nVocê escolheu ler dados de um arquivo CSV\n");
     printf("Digite o nome do arquivo CSV para realizar a leitura: ");
@@ -205,6 +252,12 @@ void carrega_dados_csv(LISTA *lista){
     free(nome_arquivo_csv);    
 }
 
+/*
+    Função executa_programa:
+    Realiza o loop do programa inteiro.
+    Indica as funcionalidade disponíveis para o usuário: inserção, remoção, adicionar palavra chave, 
+    atualiar relevancia, mostrar a lista, ler csv e sair do programa
+*/
 void executa_programa(LISTA *lista){
     int escolha = 0;
    
@@ -248,7 +301,5 @@ void executa_programa(LISTA *lista){
         else if(escolha == SAIR) 
             break;
     }
-
-    lista_mostrar(lista);
 
 }
