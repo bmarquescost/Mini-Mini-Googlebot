@@ -202,9 +202,7 @@ void carrega_dados_csv(LISTA *lista){
 
     preenche_lista_dados_csv(lista, nome_arquivo_csv);
     
-    free(nome_arquivo_csv);
-    
-    printf("\nLeitura realizada com sucesso\n\n");
+    free(nome_arquivo_csv);    
 }
 
 void executa_programa(LISTA *lista){

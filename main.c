@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
     LISTA *lista_sites;
     lista_sites = lista_criar();
     preenche_lista_dados_csv(lista_sites, ARQUIVO_GOOGLEBOT);
-    if(lista_sites != NULL) printf("Leitura de dados de Googlebot.txt bem sucedida.\n");
+    if(lista_vazia(lista_sites) == FALSE) printf("Leitura de dados de Googlebot.txt bem sucedida.\n");
     
     executa_programa(lista_sites);
 
