@@ -1,3 +1,13 @@
+/*
+    SCC0202 - ALGORITMOS E ESTRUTURAS DE DADOS I
+    Docente: Rudinei Goulart 
+
+    Aluno: Bernardo Marques Costa                    Número USP: 11795551
+    Aluno: Fernando Henrique Paes Generich           Número USP: 11795342
+
+    MINI GOOGLEBOT 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,16 +16,27 @@
 
 typedef struct _no NO;
 
+/*
+    Estrutura dos nós a serem inseridos na Lista Encadeada
+*/
 struct _no {
     WEBSITE *site; 
     NO *proximo;
 };
 
+/*
+    Estrutura da Lista Encadeada
+*/
 struct _lista {
     NO* inicio;    
     int num_nos;
 };
 
+/*
+    Função criar_no
+    Recebe como parâmetro um website e cria um nó para ele
+    Retorna o nó criado
+*/
 NO *criar_no(WEBSITE *site) {
     
     NO *no_novo = calloc(1,sizeof(NO));
@@ -25,6 +46,11 @@ NO *criar_no(WEBSITE *site) {
     return no_novo;
 }
 
+/*
+    Função deletar_no
+    Recebe como parâmetro o no a ser deletado e efetua a remoção
+    Retorna um booleano conforme for verificada a possibilidade ou não de remoção
+*/
 boolean deletar_no(NO *no_deletado){
     if(no_deletado == NULL)
         return FALSE;
@@ -39,6 +65,10 @@ boolean deletar_no(NO *no_deletado){
     return TRUE;
 }
 
+/*
+    Função lista_criar
+    Não recebe parâmetros, cria uma lista e seta seus dados para 0
+*/
 LISTA *lista_criar(void) {
     LISTA *nova_lista = calloc(1, sizeof(LISTA));
    
@@ -48,6 +78,11 @@ LISTA *lista_criar(void) {
     return nova_lista;
 }
 
+/*
+    Função lista_deletar
+    Recebe como parâmetro o endereço da lista a ser deletada
+    Retorna um booleano conforme for verificada a possibilidade ou não de deleção da lista
+*/
 boolean lista_deletar(LISTA **lista) {
     if(lista == NULL){
         printf("Erro ao apagar lista (lista inexistente).\n");
@@ -70,6 +105,11 @@ boolean lista_deletar(LISTA **lista) {
     return TRUE;
 }
 
+/*
+    Função lista_inserir
+    Recebe como parâmetros a lista e o website que srá inserido nela
+    Retorna um booleano conforme for verificada a possibilidade ou não de inserção
+*/
 boolean lista_inserir(LISTA *lista, WEBSITE *site) {
     if(lista == NULL || site == NULL) {
         printf("Erro ao inserir site na lista (site ou lista inexistente).\n");
@@ -111,6 +151,11 @@ boolean lista_inserir(LISTA *lista, WEBSITE *site) {
     return TRUE;
 }
 
+/*
+    Função lista_remover
+    Recebe como parâmetros a lista e o código do website que será removido dela
+    Retorna um booleano conforme for verificada a possibilidade ou não de remoção
+*/
 boolean lista_remover(LISTA *lista, int codigo) {
     if(lista == NULL) {
         printf("Erro ao remover nó de uma lista (lista inexistente).\n");
@@ -141,6 +186,11 @@ boolean lista_remover(LISTA *lista, int codigo) {
     return FALSE;
 }   
 
+/*
+    Função lista_busca
+    Recebe como parâmetros a lista e o código do website que será buscado nela
+    Retorna o website buscado em caso de sucesso ou NULL para uma lista vazia
+*/
 WEBSITE *lista_busca(LISTA *lista, int codigo) {
     if(lista == NULL) {
         printf("Erro ao buscar codigo em lista (lista vazia).\n");
@@ -158,6 +208,11 @@ WEBSITE *lista_busca(LISTA *lista, int codigo) {
     return auxiliar->site;
 }   
 
+/*
+    Função lista_procurar_codigo
+    Recebe como parâmetros a lista e o código procurado(auxilia a inserção de websites sem a repetição de códigos)
+    Retorna um booleano conforme for verificada a existência ou não do código na lista
+*/
 boolean lista_procurar_codigo(LISTA *lista, int codigo){
     if(lista == NULL){
         printf("Lista inexistente, impossivel buscar a codigo\n");
@@ -175,6 +230,11 @@ boolean lista_procurar_codigo(LISTA *lista, int codigo){
     return FALSE;    
 }
 
+/*
+    Função lista_tamanho
+    Recebe como parâmetro a lista cujo tamanho será verificado
+    Retorna um inteiro com o número de nós da lista em caso de sucesso ou ERRO para uma lista inexistente
+*/
 int lista_tamanho(LISTA *lista){
     if(lista == NULL) {
         printf("Erro ao ler tamanho da lista (lista inexistente).\n");
@@ -184,6 +244,11 @@ int lista_tamanho(LISTA *lista){
     return lista->num_nos;
 }
 
+/*
+    Função lista_vazia
+    Recebe como parâmetro a lista que será verificada
+    Retorna um booleano conforme for verificado se a lista está ou não vazia
+*/
 boolean lista_vazia(LISTA *lista){
     if(lista == NULL) {
         printf("Erro ao verificar se a lista está vazia (lista inexistente).\n");
@@ -192,10 +257,19 @@ boolean lista_vazia(LISTA *lista){
     return  lista->num_nos == 0;
 }
 
+/*
+    Função lista_cheia
+    Recebe como parâmetro a lista que será verificada
+    Retorna um booleano conforme for verificado se a lista está ou não cheia
+*/
 boolean lista_cheia(LISTA *lista){
     return FALSE; // Nunca é uma lista cheia, já que é alocada dinamicamente
 }
 
+/*
+    Função lista_mostrar
+    Recebe como parâmetro a lista a ser mostrada e imprime os sites nela presentes com mostrar_site
+*/
 void lista_mostrar(LISTA *l){
     if(l == NULL){
         return;
