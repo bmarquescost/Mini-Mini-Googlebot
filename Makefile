@@ -1,5 +1,5 @@
 CC = gcc
-CFLAG = -Wall -Werror -g
+CFLAGS=-Wall -Wextra -Werror -pedantic -g -O0 -std=c99
 VFLAGS = --track-origins=yes --show-leak-kinds=all --leak-check=full
 BINARY = ./menu
 MAIN = ./main.c
@@ -18,4 +18,4 @@ run:
 	@$(BINARY)
 
 zip:
-	zip -r Minigooglebot ./source $(INCLUDE) $(MAIN) Makefile
+	zip -r Minigooglebot ./source $(INCLUDE) $(MAIN) Makefile README.md
