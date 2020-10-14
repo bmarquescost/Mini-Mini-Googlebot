@@ -1,8 +1,8 @@
 # <div align="center"> Projeto – Mini Googlebot(Parte I)
 ## <div align="center"> SCC0202 - Algoritmos e Estruturas de Dados
-#### <div align="center"> Aluno: Bernardo Marques Costa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Número USP: 11795551
+#### <div align="center"> Aluno: Bernardo Marques Costa - Número USP: 11795551
 
-#### <div align="center"> Aluno: Fernando Henrique Paes Generich &nbsp;&nbsp; Número USP: 11795342
+#### <div align="center"> Aluno: Fernando Henrique Paes Generich - Número USP: 11795342
 
 #### **Compilador utilizado:** 
 GNU Compiler Collection
