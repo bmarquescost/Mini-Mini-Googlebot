@@ -213,7 +213,6 @@ boolean website_insere_palavra_chave(WEBSITE *site, char *palavra_chave){
         return FALSE;
     }
     if(site->num_palavras_chave < 10){
-        //site->palavras_chaves = realloc(site->palavras_chaves, (site->num_palavras_chave + 1) * sizeof(char*));
         
         site->palavras_chaves[site->num_palavras_chave] = palavra_chave;    
         
