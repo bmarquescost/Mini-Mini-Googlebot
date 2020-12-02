@@ -1,6 +1,6 @@
 /*
     SCC0202 - ALGORITMOS E ESTRUTURAS DE DADOS I
-    Docente: Rudinei Goulart 
+    Docente: Rudinei Goularte 
 
     Aluno: Bernardo Marques Costa                    Número USP: 11795551
     Aluno: Fernando Henrique Paes Generich           Número USP: 11795342
