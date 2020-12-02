@@ -240,6 +240,19 @@ int website_consulta_num_palavras_chave(WEBSITE *site){
 }
 
 /*
+*/
+boolean verifica_palavra_chave(WEBSITE *website, char *palavra_chave) {
+    if(website == NULL || palavra_chave == NULL) return FALSE;
+    
+    for(int i = 0; i < website->num_palavras_chave; ++i) {
+        if(strcmp(website->palavras_chaves[i], palavra_chave) == 0) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+/*
     Função mostrar_site
     Recebe como parãmetro o website a ser mostrado e imprime os dados desse website
 */

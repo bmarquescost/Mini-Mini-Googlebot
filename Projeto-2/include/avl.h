@@ -12,6 +12,7 @@
 #define _AVL_H_
 
 #include "website.h"
+#include "palavras_chave.h"
 
 typedef struct _no NO;
 typedef struct _avl AVL;
@@ -27,5 +28,6 @@ boolean avl_vazia(AVL *arvore);
 void avl_imprimir_em_ordem(AVL *arvore);
 void avl_imprimir_pre_ordem(AVL *arvore);
 int avl_num_sites(AVL *arvore);
+PALAVRAS_CHAVE *avl_buscar_palavra_chave( AVL *arvore, char *palavra_chave);
 
 #endif

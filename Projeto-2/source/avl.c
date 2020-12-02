@@ -364,3 +364,33 @@ void avl_imprimir_pre_ordem(AVL *arvore) {
     else
         _avl_imprimir_recursiva_pre_order(arvore->raiz);
 }
+
+/*
+*/
+static void _avl_buscar_palavra_recursiva(NO *no, char *palavra_chave, PALAVRAS_CHAVE *sites_encontrados) {
+    if(no == NULL) return;
+
+    _avl_buscar_palavra_recursiva(no->esquerda, palavra_chave, sites_encontrados);
+    
+    if(verifica_palavra_chave(no->site, palavra_chave))
+        palavras_chave_inserir_site(sites_encontrados, no->site);
+
+    _avl_buscar_palavra_recursiva(no->direita, palavra_chave, sites_encontrados);
+}
+
+/*
+*/
+PALAVRAS_CHAVE *avl_buscar_palavra_chave( AVL *arvore, char *palavra_chave) {
+    if(palavra_chave == NULL || arvore == NULL) return NULL;
+
+    PALAVRAS_CHAVE *sites_encontrados = palavras_chave_criar();
+    palavras_chave_alterar_palavra(sites_encontrados, palavra_chave);
+
+    _avl_buscar_palavra_recursiva(arvore->raiz, palavra_chave, sites_encontrados);
+
+    palavras_chave_ordenar(sites_encontrados);
+
+    printar_lista_encontrada(sites_encontrados);
+    
+    return sites_encontrados;
+}

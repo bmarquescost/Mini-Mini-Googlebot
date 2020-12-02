@@ -25,6 +25,8 @@ int website_consulta_codigo(WEBSITE *site);
 boolean website_insere_palavra_chave(WEBSITE *site, char *palavra_chave);
 int website_consulta_num_palavras_chave(WEBSITE *site);
 
+boolean verifica_palavra_chave(WEBSITE *website, char *palavra_chave);
+
 void mostrar_site(WEBSITE *site);
 
 

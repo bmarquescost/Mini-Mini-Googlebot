@@ -15,9 +15,10 @@
 #include "website.h"
 #include "util.h"
 #include "avl.h"
+#include "palavras_chave.h"
 
 // Enumeração para facilitar a chamada das funções
-enum comando { INSERIR_SITE = 0, REMOVER, INSERIR_PALAVRA, ATUALIZAR_RELEVANCIA, MOSTRA_LISTA, LER_CSV, SAIR};
+enum comando { INSERIR_SITE = 0, REMOVER, INSERIR_PALAVRA, ATUALIZAR_RELEVANCIA, MOSTRA_LISTA, LER_CSV, BUSCAR_PALAVRA, SUGERIR_SITE,SAIR};
 
 void imprime_menu(){
     printf("\n_______________________________________________________________\n");
@@ -28,7 +29,9 @@ void imprime_menu(){
     printf("\t[3] - Atualizar relevância de um site\n");
     printf("\t[4] - Mostrar a lista obtida ate agora\n");
     printf("\t[5] - Realizar a leitura de dados a partir de um CSV\n");
-    printf("\t[6] - Sair\n");
+    printf("\t[6] - Buscar palavra-chave\n");
+    printf("\t[7] - Sugerir sites\n");
+    printf("\t[8] - Sair\n");
     printf("_______________________________________________________________\n");
 }
 
@@ -257,6 +260,17 @@ void carrega_dados_csv(AVL *arvore) {
     free(nome_arquivo_csv);    
 }
 
+void buscar_palavra(AVL *arvore) {
+    printf("\nVocê escolheu buscar uma palavra-chave na lista de sites.\n");
+    printf("Digite a palavra-chave que deseja buscar: ");
+
+    char *palavra_buscada = leitura_de_linha(stdin);
+    
+    PALAVRAS_CHAVE *sites_encontrados = avl_buscar_palavra_chave(arvore, palavra_buscada);    
+
+    palavras_chave_deletar(&sites_encontrados);
+}
+
 /*
     Função executa_programa:
     Realiza o loop do programa inteiro.
@@ -300,6 +314,12 @@ void executa_programa(AVL *arvore) {
         else if(escolha == LER_CSV)
             carrega_dados_csv(arvore);
 
+        else if(escolha == BUSCAR_PALAVRA)
+            buscar_palavra(arvore);
+
+        // else if(escolha == SUGERIR_SITE)
+        //     sugerir_site(arvore);
+        
         else if(escolha == SAIR) 
             break;
     }
