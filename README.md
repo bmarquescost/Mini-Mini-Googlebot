@@ -31,3 +31,5 @@ Inserção: Julgamos que eram necessárias duas formas de inserir dados na lista
 Remoção: Foi implementada uma remoção levando em consideração três casos: website no começo, no fim e no meio da lista encadeada. Nos três casos, primeiro efetuamos a reorganização dos encadeamentos entre os nós da lista e depois liberamos a memória utilizada pelo website que desejávamos remover.
 
 Busca: Implementamos duas funções de busca, uma de verificação de existência e outra que retorna o website procurado ao achá-lo, as duas foram implementadas seguindo o molde de busca sequencial para percorrer a lista.
+
+
