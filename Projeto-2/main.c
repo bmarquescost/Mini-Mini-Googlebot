@@ -22,9 +22,10 @@
 
 int main(int argc, char *argv[]){
     // imprimindo o cabeçalho do programa
-    printf("______________________________________________________________\n");
-    printf("\n                       GOOGLEBOT                            \n");
-    printf("______________________________________________________________\n\n");
+    printf("+--------------------------------------------------------------+\n");
+    printf("|                      MINI - GOOGLEBOT                        |\n");
+    printf("+--------------------------------------------------------------+\n");
+    printf("%60s\n\n", "o retorno parte 2...");
     
     // Leitura do arquivo padrão "googlebot.txt"
     printf("Obtendo dados do arquivo padrão inicial ...\n\n");    
@@ -41,7 +42,6 @@ int main(int argc, char *argv[]){
 
     // Liberando a memória heap utilizada pelo programa.
     avl_deletar(&arvore_sites);
-    printf("DEBUG\n");
     
     return 0;
 }

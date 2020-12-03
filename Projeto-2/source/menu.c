@@ -21,18 +21,18 @@
 enum comando { INSERIR_SITE = 0, REMOVER, INSERIR_PALAVRA, ATUALIZAR_RELEVANCIA, MOSTRA_LISTA, LER_CSV, BUSCAR_PALAVRA, SUGERIR_SITE,SAIR};
 
 void imprime_menu(){
-    printf("\n_______________________________________________________________\n");
-    printf("Digite o comando desejado de acordo com a seguinte enumeração\n");
-    printf("\t[0] - Inserir um site na lista\n");
-    printf("\t[1] - Remover um site da lista\n");
-    printf("\t[2] - Inserir palavra-chave para um site\n");
-    printf("\t[3] - Atualizar relevância de um site\n");
-    printf("\t[4] - Mostrar a lista obtida ate agora\n");
-    printf("\t[5] - Realizar a leitura de dados a partir de um CSV\n");
-    printf("\t[6] - Buscar palavra-chave\n");
-    printf("\t[7] - Sugerir sites\n");
-    printf("\t[8] - Sair\n");
-    printf("_______________________________________________________________\n");
+    printf("\n+---------------------------------------------------------------+\n");
+    printf("| Digite o comando desejado de acordo com a seguinte enumeração |\n");
+    printf("|\t[0] - Inserir um site na lista                          |\n");
+    printf("|\t[1] - Remover um site da lista                          |\n");
+    printf("|\t[2] - Inserir palavra-chave para um site                |\n");
+    printf("|\t[3] - Atualizar relevância de um site                   |\n");
+    printf("|\t[4] - Mostrar a lista obtida ate agora                  |\n");
+    printf("|\t[5] - Realizar a leitura de dados a partir de um CSV    |\n");
+    printf("|\t[6] - Buscar palavra-chave                              |\n");
+    printf("|\t[7] - Sugerir sites                                     |\n");
+    printf("|\t[8] - Sair                                              |\n");
+    printf("+---------------------------------------------------------------+\n");
 }
 
 /*
@@ -76,7 +76,11 @@ boolean cria_site_insere_na_arvore(AVL *arvore, int codigo, char *nome,  char *u
     Recebe pelo stdin todas as informações necessárias para que o usuário insira um novo website na lista.
 */
 void inserir_site(AVL *arvore) {
-    printf("\n\nVocê escolheu inserir um novo site\n");
+    printf("\n+-------------------------------------------+\n");
+    printf("|              INSERIR SITE                 |\n");
+    printf("+-------------------------------------------+\n");
+
+    printf("Você escolheu inserir um novo site\n");
     
     printf("Digite o código do site: ");
     
@@ -158,6 +162,10 @@ void inserir_site(AVL *arvore) {
     Procura pelo código na lista, removendo-o caso o encontre.
 */
 void remover_site(AVL *arvore) {
+    printf("\n+-------------------------------------------+\n");
+    printf("|             REMOVER SITE                  |\n");
+    printf("+-------------------------------------------+\n");
+
     printf("\n\nVocê escolheu remover um site da lista\n");
     printf("Digite o código do site que deseja remover: ");
     
@@ -178,7 +186,12 @@ void remover_site(AVL *arvore) {
     é realizada a inserção da mais uma palavra chave (lembrando do máximo permitido de 10 palavras)
 */
 void inserir_palavra_chave(AVL *arvore) {
-    printf("\n\nVocê selecionou inserir uma palavra-chave\n");
+    printf("\n+-------------------------------------------+\n");
+    printf("|        INSERIR PALAVRA-CHAVE              |\n");
+    printf("+-------------------------------------------+\n");
+    
+
+    printf("Você selecionou inserir uma palavra-chave\n");
     printf("Digite qual o código do site em que deseja inserir a nova palavra: ");
     
     int codigo;
@@ -215,7 +228,11 @@ void inserir_palavra_chave(AVL *arvore) {
     por um valor desejado pelo usuário.
 */
 void atualizar_relevancia(AVL *arvore) {
-    printf("\nVocê escolheu atualizar a relevância de um site na lista.\n");
+    printf("\n+-------------------------------------------+\n");
+    printf("|           ATUALIZAR RELEVÂNCIA            |\n");
+    printf("+-------------------------------------------+\n");
+
+    printf("Você escolheu atualizar a relevância de um site na lista.\n");
     printf("Digite o código do site que deseja atualizar a relevancia: ");
     
     int codigo;
@@ -250,6 +267,10 @@ void atualizar_relevancia(AVL *arvore) {
     as informações obtidas para a lista.
 */
 void carrega_dados_csv(AVL *arvore) {
+    printf("\n+-------------------------------------------+\n");
+    printf("|            CARREGAR DADOS CSV             |\n");
+    printf("+-------------------------------------------+\n\n");
+
     printf("\nVocê escolheu ler dados de um arquivo CSV\n");
     printf("Digite o nome do arquivo CSV para realizar a leitura: ");
     
@@ -261,14 +282,21 @@ void carrega_dados_csv(AVL *arvore) {
 }
 
 void buscar_palavra(AVL *arvore) {
-    printf("\nVocê escolheu buscar uma palavra-chave na lista de sites.\n");
+    printf("\n+-------------------------------------------+\n");
+    printf("|  BUSCAR PALAVRA-CHAVE NA LISTA DE SITES   |\n");
+    printf("+-------------------------------------------+\n\n");
+    printf("Você escolheu buscar uma palavra-chave na lista de sites.\n");
     printf("Digite a palavra-chave que deseja buscar: ");
 
     char *palavra_buscada = leitura_de_linha(stdin);
     
     PALAVRAS_CHAVE *sites_encontrados = avl_buscar_palavra_chave(arvore, palavra_buscada);    
 
+    printar_lista_encontrada(sites_encontrados);
+    
     palavras_chave_deletar(&sites_encontrados);
+
+    free(palavra_buscada);
 }
 
 /*
@@ -320,8 +348,14 @@ void executa_programa(AVL *arvore) {
         // else if(escolha == SUGERIR_SITE)
         //     sugerir_site(arvore);
         
-        else if(escolha == SAIR) 
+        else if(escolha == SAIR) {
+            printf("\n+-------------------------------------------+\n");
+            printf("|            ENCERRANDO O PROGRAMA          |\n");
+            printf("+-------------------------------------------+\n");
+
+            printf("Obrigado por usar o programa. Saindo...\n");
             break;
+        }
     }
 
 }

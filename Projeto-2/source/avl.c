@@ -390,7 +390,5 @@ PALAVRAS_CHAVE *avl_buscar_palavra_chave( AVL *arvore, char *palavra_chave) {
 
     palavras_chave_ordenar(sites_encontrados);
 
-    printar_lista_encontrada(sites_encontrados);
-    
     return sites_encontrados;
 }

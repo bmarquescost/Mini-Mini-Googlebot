@@ -20,16 +20,13 @@ PALAVRAS_CHAVE *palavras_chave_criar() {
     nova_lista->palavra_chave = NULL;
     nova_lista->multiplicador = 1;
 
-    
-
     return nova_lista;
 }
 
 void palavras_chave_deletar(PALAVRAS_CHAVE **sites_encontrados) {
-    for(int i = 0; i < (*sites_encontrados)->num_sites ; ++i) {
-        free((*sites_encontrados)->lista_de_sites[i]);
-        (*sites_encontrados)->lista_de_sites[i] = NULL;
-    }
+    
+    free((*sites_encontrados)->lista_de_sites);
+    (*sites_encontrados)->lista_de_sites = NULL;
 
     (*sites_encontrados)->palavra_chave = NULL;
     free(*sites_encontrados);
@@ -58,28 +55,35 @@ void printar_lista_encontrada(PALAVRAS_CHAVE *sites_encontrados){
     if(sites_encontrados == NULL) return;
 
     if(sites_encontrados->num_sites == 0 || sites_encontrados->lista_de_sites == NULL) {
-        printf("Nenhum site encontrado!\n");
+        printf("\n| Nenhum site com a palavra \"%s\" entre suas palavras-chave foi encontrado!\n", sites_encontrados->palavra_chave); 
         return;
     }
-
-    printf("Os sites encontrados com a palavra-chave %s são:\n", sites_encontrados->palavra_chave);
+    
+    printf("\n+---------------------------------------------------------------+\n");
+    printf("| Os sites encontrados com a palavra-chave \"%s\" são:\n|\n", sites_encontrados->palavra_chave);
     for(int i = 0; i < sites_encontrados->num_sites ; ++i) {
-        printf("%s - %d\n", website_consulta_nome(sites_encontrados->lista_de_sites[i]), website_consulta_relevancia(sites_encontrados->lista_de_sites[i]));
+        printf("| [%d] %s\n", i, website_consulta_nome(sites_encontrados->lista_de_sites[i]));
+        printf("|\tRelevância: %d \n|\tURL: %s\n",  website_consulta_relevancia(sites_encontrados->lista_de_sites[i]), website_consulta_url(sites_encontrados->lista_de_sites[i]));
+        if(i + 1 != sites_encontrados->num_sites) printf("|\n");
     }
+    
+    printf("+---------------------------------------------------------------+\n");
+
 }
 
 static void min_heapify(PALAVRAS_CHAVE *s, int indice, int n) {
+    
     int menor = indice;
-
-    int filho_esquerda = (indice*2) + 1; 
-    int filho_direita = (indice*2) + 2;
-
-    if(filho_esquerda < n && website_consulta_relevancia(s->lista_de_sites[filho_esquerda]) < website_consulta_relevancia(s->lista_de_sites[menor]))
+    int filho_esquerda = indice * 2 + 1; 
+    int filho_direita = indice * 2 + 2;
+    
+    
+    if(filho_esquerda < n && website_consulta_relevancia(s->lista_de_sites[filho_esquerda]) < website_consulta_relevancia(s->lista_de_sites[menor])) 
         menor = filho_esquerda;
     
-    if(filho_direita < n && website_consulta_relevancia(s->lista_de_sites[filho_direita]) < website_consulta_relevancia(s->lista_de_sites[menor]))
+    if(filho_direita < n && website_consulta_relevancia(s->lista_de_sites[filho_direita]) < website_consulta_relevancia(s->lista_de_sites[menor])) 
         menor = filho_direita;
-    
+        
     if(menor != indice) {
         WEBSITE *tmp = s->lista_de_sites[indice];
         s->lista_de_sites[indice] = s->lista_de_sites[menor];
@@ -98,6 +102,8 @@ static void heapsort(PALAVRAS_CHAVE *s, int n) {
         WEBSITE *tmp = s->lista_de_sites[0];
         s->lista_de_sites[0] = s->lista_de_sites[i];
         s->lista_de_sites[i] = tmp;
+
+        min_heapify(s, 0, i);
     }
 }
 
