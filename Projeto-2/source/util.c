@@ -12,9 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "website.h"
 #include "util.h"
-#include "avl.h"
 
 /*
     Função leitura_de_linha:

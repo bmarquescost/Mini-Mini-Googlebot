@@ -2,11 +2,11 @@
 #define _TRIE_H_
 
 
-#include "util.h"
-
 #define ALFABETO 26
 typedef struct _trie TRIE;
 typedef struct _no NO;
+
+#include "util.h"
 
 TRIE *trie_criar(void);
 void trie_deletar(TRIE **trie_deletada);

@@ -3,6 +3,8 @@
 
 #include "util.h"
 #include "avl.h"
+#include "trie.h"
+#include "palavras_chave.h"
 
 #define boolean int
 #define TRUE 1
@@ -367,28 +369,52 @@ void avl_imprimir_pre_ordem(AVL *arvore) {
 
 /*
 */
-static void _avl_buscar_palavra_recursiva(NO *no, char *palavra_chave, PALAVRAS_CHAVE *sites_encontrados) {
+static void _avl_buscar_palavra_recursiva(NO *no, char *palavra_chave, LISTA_SITES *sites_encontrados) {
     if(no == NULL) return;
 
     _avl_buscar_palavra_recursiva(no->esquerda, palavra_chave, sites_encontrados);
     
     if(verifica_palavra_chave(no->site, palavra_chave))
-        palavras_chave_inserir_site(sites_encontrados, no->site);
+        lista_sites_inserir_site(sites_encontrados, no->site);
 
     _avl_buscar_palavra_recursiva(no->direita, palavra_chave, sites_encontrados);
 }
 
-/*
-*/
-PALAVRAS_CHAVE *avl_buscar_palavra_chave( AVL *arvore, char *palavra_chave) {
+
+LISTA_SITES *avl_buscar_palavra_chave(AVL *arvore, char *palavra_chave) {
     if(palavra_chave == NULL || arvore == NULL) return NULL;
 
-    PALAVRAS_CHAVE *sites_encontrados = palavras_chave_criar();
-    palavras_chave_alterar_palavra(sites_encontrados, palavra_chave);
+    LISTA_SITES *sites_encontrados = lista_sites_criar();
 
     _avl_buscar_palavra_recursiva(arvore->raiz, palavra_chave, sites_encontrados);
 
-    palavras_chave_ordenar(sites_encontrados);
-
     return sites_encontrados;
+}
+
+static void _avl_verificar_na_trie(NO *no, LISTA_SITES *sugestoes, TRIE *palavras) {
+    if(no == NULL) return;
+
+    _avl_verificar_na_trie(no->esquerda, sugestoes, palavras);
+    
+    char **palavras_chave_site = website_consulta_palavras_chave(no->site);
+    for(int i = 0; i < website_consulta_num_palavras_chave(no->site); ++i) {
+        if(trie_procurar_palavra(palavras, palavras_chave_site[i])) {
+            lista_sites_inserir_site(sugestoes, no->site);
+            break;
+        }
+    }
+
+    _avl_verificar_na_trie(no->direita, sugestoes, palavras);
+}
+
+LISTA_SITES *verificar_sites_para_sugestao(AVL *arvore, TRIE *palavras_chave) {
+    if(arvore == NULL || palavras_chave == NULL) return NULL;
+
+    LISTA_SITES *sites_sugeridos = lista_sites_criar();
+
+    _avl_verificar_na_trie(arvore->raiz, sites_sugeridos, palavras_chave);
+
+    lista_sites_ordenar(sites_sugeridos);
+
+    return sites_sugeridos;
 }

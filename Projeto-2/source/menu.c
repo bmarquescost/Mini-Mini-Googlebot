@@ -11,9 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "util.h"
 #include "menu.h"
 #include "website.h"
-#include "util.h"
 #include "avl.h"
 #include "palavras_chave.h"
 
@@ -290,13 +290,47 @@ void buscar_palavra(AVL *arvore) {
 
     char *palavra_buscada = leitura_de_linha(stdin);
     
-    PALAVRAS_CHAVE *sites_encontrados = avl_buscar_palavra_chave(arvore, palavra_buscada);    
+    LISTA_SITES *sites_encontrados = avl_buscar_palavra_chave(arvore, palavra_buscada);    
+
+    lista_sites_ordenar(sites_encontrados);
 
     printar_lista_encontrada(sites_encontrados);
     
-    palavras_chave_deletar(&sites_encontrados);
+
+    lista_sites_deletar(&sites_encontrados);
 
     free(palavra_buscada);
+}
+
+void sugerir_sites(AVL *arvore) {
+    printf("\n+-------------------------------------------+\n");
+    printf("|                 SUGERIR SITES             |\n");
+    printf("+-------------------------------------------+\n\n");
+    printf("Você escolheu sugerir sites a partir de uma palavra-chave.\n");
+    printf("Digite a palavra-chave que deseja iniciar sua busca: ");
+
+    char *palavra_chave_inicial = leitura_de_linha(stdin);
+
+    LISTA_SITES *sites_com_palavra_chave = avl_buscar_palavra_chave(arvore, palavra_chave_inicial);
+
+    if(sites_com_palavra_chave == NULL || lista_sites_consulta_num_sites(sites_com_palavra_chave) == 0) { 
+        printf("Não existem sites com a palavra chave %s!!\n", palavra_chave_inicial);
+        free(palavra_chave_inicial);
+        return;
+    }
+
+    TRIE *palavras_chave = construir_trie_com_lista_sites(sites_com_palavra_chave);
+    
+    LISTA_SITES *sugestoes = verificar_sites_para_sugestao(arvore, palavras_chave);
+
+    lista_sites_ordenar(sugestoes);
+
+    printar_lista_encontrada(sugestoes);
+
+    trie_deletar(&palavras_chave);
+    lista_sites_deletar(&sites_com_palavra_chave);
+    lista_sites_deletar(&sugestoes);
+    free(palavra_chave_inicial);
 }
 
 /*
@@ -345,8 +379,8 @@ void executa_programa(AVL *arvore) {
         else if(escolha == BUSCAR_PALAVRA)
             buscar_palavra(arvore);
 
-        // else if(escolha == SUGERIR_SITE)
-        //     sugerir_site(arvore);
+        else if(escolha == SUGERIR_SITE)
+            sugerir_sites(arvore);
         
         else if(escolha == SAIR) {
             printf("\n+-------------------------------------------+\n");

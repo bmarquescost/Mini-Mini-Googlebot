@@ -239,6 +239,21 @@ int website_consulta_num_palavras_chave(WEBSITE *site){
     return site->num_palavras_chave;
 }
 
+char **website_consulta_palavras_chave(WEBSITE *site) {
+    if(site == NULL) {
+        printf("Site inexistente, não existe palavras chave\n");
+        return NULL;
+    }
+    int num_palavras_chave = website_consulta_num_palavras_chave(site);
+
+    if(num_palavras_chave == 0) {
+        printf("Não existe palavras chaves no site\n");
+        return NULL;
+    }
+
+    return site->palavras_chaves;
+}
+
 /*
 */
 boolean verifica_palavra_chave(WEBSITE *website, char *palavra_chave) {
