@@ -166,16 +166,6 @@ boolean avl_inserir_site(AVL *arvore, WEBSITE *site) {
     return inseriu;
 }
 
-static NO *_pegar_menor_subarvore_direita(NO *raiz) {
-    if(raiz == NULL) return NULL;
-    NO *atual = raiz;
-
-    while(atual->esquerda != NULL)
-        atual = atual->esquerda;
-    
-    return atual;
-}
-
 static void _troca_max_esquerda(NO *troca, NO *raiz, NO *anterior) {
 	if(troca->direita != NULL){
 		_troca_max_esquerda(troca->direita, raiz, troca);
@@ -373,7 +363,7 @@ static void _avl_buscar_palavra_recursiva(NO *no, char *palavra_chave, LISTA_SIT
 
     _avl_buscar_palavra_recursiva(no->esquerda, palavra_chave, sites_encontrados);
     
-    if(verifica_palavra_chave(no->site, palavra_chave))
+    if(website_verifica_palavra_chave(no->site, palavra_chave))
         lista_sites_inserir_site(sites_encontrados, no->site);
 
     _avl_buscar_palavra_recursiva(no->direita, palavra_chave, sites_encontrados);

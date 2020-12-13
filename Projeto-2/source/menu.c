@@ -292,11 +292,18 @@ void buscar_palavra(AVL *arvore) {
     
     LISTA_SITES *sites_encontrados = avl_buscar_palavra_chave(arvore, palavra_buscada);    
 
+    if(lista_sites_consulta_num_sites(sites_encontrados) == 0) {
+        lista_sites_deletar(&sites_encontrados);
+        printf("A palavra-chave buscada '%s' não está presente em nenhum dos sites\n", palavra_buscada);
+        free(palavra_buscada);
+        return;
+    }
+
     lista_sites_ordenar(sites_encontrados);
 
+    printf("\nOs sites encontradados com a palavra-chave '%s' foram:\n", palavra_buscada);
     printar_lista_encontrada(sites_encontrados);
     
-
     lista_sites_deletar(&sites_encontrados);
 
     free(palavra_buscada);
@@ -315,6 +322,7 @@ void sugerir_sites(AVL *arvore) {
 
     if(sites_com_palavra_chave == NULL || lista_sites_consulta_num_sites(sites_com_palavra_chave) == 0) { 
         printf("Não existem sites com a palavra chave %s!!\n", palavra_chave_inicial);
+        lista_sites_deletar(&sites_com_palavra_chave);
         free(palavra_chave_inicial);
         return;
     }
@@ -325,6 +333,7 @@ void sugerir_sites(AVL *arvore) {
 
     lista_sites_ordenar(sugestoes);
 
+    printf("\nA seguir, temos os sites sugeridos a partir da palavra-chave '%s'\n", palavra_chave_inicial);
     printar_lista_encontrada(sugestoes);
 
     trie_deletar(&palavras_chave);
