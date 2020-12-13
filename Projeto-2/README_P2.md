@@ -40,7 +40,7 @@ Ordenaremos a lista de sites com o algoritmo de ordenação heapsort.
 
 **O.B.S**: algumas questões sobre a complexidade desta funcionalidade (considerando n como o número de sites obtidas no programa):
 
-- Devemos primeiramente percorrer toda a árvore, para verificar se o site contem à palavra chave inicialmente fornecida - complexidade O(n). A criação da lista de sites e a inserção desordenada possui complexidade O(1).
+- Devemos primeiramente percorrer toda a árvore, para verificar se o site contem à palavra chave inicialmente fornecida - necessário (no pior caso) 10n operações de consulta (10 palavras chave e n sites), complexidade O(n). A criação da lista de sites e a inserção desordenada possui complexidade O(1).
 
 - A partir da lista de sites completa, construiremos a trie: percorreremos na lista cada site e acessamos cada uma de suas palavras chave, inserindo-a na trie, o que resulta em uma complexidade (no pior caso de 10 palavras chave em todos os n sites) 10nc operações, sendo c o tamanho da palavra chave.
 
