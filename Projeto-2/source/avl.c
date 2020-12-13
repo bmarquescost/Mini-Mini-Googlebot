@@ -468,7 +468,7 @@ static void _avl_buscar_palavra_recursiva(NO *no, char *palavra_chave, LISTA_SIT
 
     _avl_buscar_palavra_recursiva(no->esquerda, palavra_chave, sites_encontrados);
     
-    if(verifica_palavra_chave(no->site, palavra_chave))
+    if(website_verifica_palavra_chave(no->site, palavra_chave))
         lista_sites_inserir_site(sites_encontrados, no->site);
 
     _avl_buscar_palavra_recursiva(no->direita, palavra_chave, sites_encontrados);

@@ -239,6 +239,12 @@ int website_consulta_num_palavras_chave(WEBSITE *site){
     return site->num_palavras_chave;
 }
 
+/*
+    Função website_consulta_palavras_chave:
+    A função retorna o ponteiro para a lista de palavras chave do site 
+    Caso não exista nenhuma palavra chave, ou a lista seja inexistente, retornamos uma mensagem de erro
+    e retornamos um ponteiro nulo
+*/
 char **website_consulta_palavras_chave(WEBSITE *site) {
     if(site == NULL) {
         printf("Site inexistente, não existe palavras chave\n");
@@ -255,8 +261,11 @@ char **website_consulta_palavras_chave(WEBSITE *site) {
 }
 
 /*
+    Função verifica_palavra_chave:
+    A função verifica, a partir de um site enviado como parâmetro, se a palavra chave (também enviada como
+    parâmetro) está presente entre suas palavras-chave
 */
-boolean verifica_palavra_chave(WEBSITE *website, char *palavra_chave) {
+boolean website_verifica_palavra_chave(WEBSITE *website, char *palavra_chave) {
     if(website == NULL || palavra_chave == NULL) return FALSE;
     
     for(int i = 0; i < website->num_palavras_chave; ++i) {

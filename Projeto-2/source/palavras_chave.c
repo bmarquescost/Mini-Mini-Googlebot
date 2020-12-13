@@ -13,19 +13,6 @@ struct _lista_sites {
     int multiplicador; // Auxiliar para realocaçäo da lista de sites (para que não seja necessário realocar memória a toda nova inserção de sites na lista)
 };
 
-// Struct utilizada para a sugestões de site 
-struct _sugestoes {
-    LISTA_SITES *lista_sites; // Armazena uma lista de sites que possuem ao menos uma daquelas palavras chave
-    TRIE *palavras_chave;     // Estrutura de dados que armazena todas as palavras chaves existentes
-    int qtd_palavras_chave;   // Variável que armazena a quantidade de palavras chaves total
-};
-
-// Struct que armazena todos os sites que possuem dada palavra entre suas palavras chave
-struct _mesmas_palavra_chave {
-    LISTA_SITES *lista_sites; // Lista de sites
-    char *palavra_chave;      // Palavra chave que está relacionada a todas estes sites na lista
-};
-
 /*
     Função lista_sites_criar:
     Inicia uma nova instancia de lista de sites
@@ -40,6 +27,10 @@ LISTA_SITES *lista_sites_criar(void) {
     return nova_lista;
 }
 
+/*
+    Função lista_sites_deletar:
+    Deleta uma lista de sites enviada como parâmetro para a função 
+*/
 void lista_sites_deletar(LISTA_SITES **lista_apagada) {
     if(*lista_apagada == NULL) return;
 
@@ -50,6 +41,11 @@ void lista_sites_deletar(LISTA_SITES **lista_apagada) {
     *lista_apagada = NULL;
 }
 
+/*
+    Função lista_sites_inserir_site:
+    A função insere um novo site passado como segundo parâmetro na lista de sites passada como
+    primeiro parâmetro
+*/
 void lista_sites_inserir_site(LISTA_SITES *l, WEBSITE *site) {
     if(l == NULL || site == NULL) return;
 
@@ -62,53 +58,20 @@ void lista_sites_inserir_site(LISTA_SITES *l, WEBSITE *site) {
     ++l->qtd_sites;
 }
 
-
+/*
+    Função lista_sites_consulta_num_sites:
+    Retorna o inteiro correspondente ao número de sites que aquela lista, enviada como parâmetro, armazena
+*/
 int lista_sites_consulta_num_sites(LISTA_SITES *l) {
     if(l == NULL) return ERRO;
 
     return l->qtd_sites;
 }
 
-
-
-/* 
-    Função palavras_chave_criar:
-    Inicia uma nova instancia da struct MSM_PALAVRA, usada para a primeira função
+/*
+    Função printar_lista_encontrada:
+    Função que printa os sites encontrados, mostrando o nome de cada site, sua relevância e sua URL
 */
-MSM_PALAVRA *msm_palavra_chave_criar() {
-    MSM_PALAVRA *nova_lista = calloc(1, sizeof(MSM_PALAVRA));
-    
-    nova_lista->palavra_chave = NULL;
-    nova_lista->lista_sites = calloc(1, sizeof(LISTA_SITES));
-    nova_lista->lista_sites->multiplicador = 1;
-    
-    return nova_lista;
-}
-
-/* 
-    Função palavras_chave_deletar:
-*/
-void msm_palavra_chave_deletar(MSM_PALAVRA **sites_encontrados) {
-    if(*sites_encontrados == NULL) return;   
-
-    lista_sites_deletar(&(*sites_encontrados)->lista_sites);
-
-    free((*sites_encontrados));
-    (*sites_encontrados) = NULL;
-}
-
-void msm_palavra_chave_alterar_palavra(MSM_PALAVRA *lista, char *palavra_chave) {
-    if(lista == NULL || palavra_chave == NULL) return;
-
-    lista->palavra_chave = palavra_chave;
-}
-
-void msm_palavra_chave_inserir_site(MSM_PALAVRA *sites_msm_palavra, WEBSITE *site_encontrado) {
-    if(sites_msm_palavra == NULL || site_encontrado == NULL) return;
-
-    
-}
-
 void printar_lista_encontrada(LISTA_SITES *sites_encontrados){
     if(sites_encontrados == NULL) return;
 
@@ -126,22 +89,23 @@ void printar_lista_encontrada(LISTA_SITES *sites_encontrados){
 
 }
 
-TRIE *construir_trie_com_lista_sites(LISTA_SITES *l) {
-    if(l == NULL) return NULL;
+/*
+    Função lista_sites_retorna_websites:
+    A partir de uma lista de sites dada como parâmetro, retorna o ponteiro para a lista de websites
+    A função é útil para que outras funções necessárias em outros arquivos tenham acesso a lista de sites sem
+    quebrar a estruturação do TAD LISTA_SITES 
+*/
+WEBSITE **lista_sites_retorna_websites(LISTA_SITES *lista) {
+    if(lista == NULL) return NULL;
 
-    TRIE *palavras_chave = trie_criar();
-    
-    for(int i = 0; i < l->qtd_sites; ++i) {
-        char **palavras_do_site = website_consulta_palavras_chave(l->sites[i]);
-        
-        for(int j = 0; j < website_consulta_num_palavras_chave(l->sites[i]); ++j)
-            trie_inserir_palavra(palavras_chave, palavras_do_site[j]);
-    }
-
-    return palavras_chave;
+    return lista->sites;
 }
 
-
+/*
+    Função min_heapify:
+    Posiciona o nó de menor valor no final da lista, de forma a criar uma estrutura de min heap
+    Utilizada como auxiliar para o algoritmo de ordenação heapsort
+*/
 static void min_heapify(WEBSITE **s, int indice, int n) {
     
     int menor = indice;
@@ -165,6 +129,12 @@ static void min_heapify(WEBSITE **s, int indice, int n) {
 
 }
 
+/*
+    Função heapsort:
+    Algoritmo de ordenação de complexidade O(n log n) que realiza a ordenação com base na comparação e criação
+    de vetores com propriedades de heap
+    Realiza a ordenação decrescente (neste caso)
+*/
 static void heapsort(WEBSITE **s, int n) {
     for(int i = n/2 - 1; i >= 0; --i)
         min_heapify(s, i, n);
@@ -178,15 +148,13 @@ static void heapsort(WEBSITE **s, int n) {
     }
 }
 
+/*
+    Função lista_sites_ordenar:
+    Realiza a ordenação decrescente por relevância dos sites, ordenando a partir do algoritmo heapsort, a lista de sites
+    enviada como parâmetro
+*/
 void lista_sites_ordenar(LISTA_SITES *lista_sites) {
     if(lista_sites == NULL) return;
 
     heapsort(lista_sites->sites, lista_sites->qtd_sites);
-}
-
-void msm_palavra_chave_ordenar(MSM_PALAVRA *sites_encontrados) {
-    if(sites_encontrados == NULL) return;
-
-    heapsort(sites_encontrados->lista_sites->sites, sites_encontrados->lista_sites->qtd_sites);
-    
 }
