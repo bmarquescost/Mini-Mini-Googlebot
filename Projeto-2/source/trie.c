@@ -71,12 +71,11 @@ void trie_deletar(TRIE **trie_deletada) {
     Função privada _retornar_indice_trie:
     Retorna o índice de cada caractere em relação ao vetor de nós, correspondente ao intervalo 0-25
 */
-static int _retornar_indice_trie(char caractere) {
+static int _retornar_indice_trie(unsigned char caractere) {
     if(caractere >= 'a' && caractere <= 'z')
         return caractere - 'a';
-    if(caractere >= 'A' && caractere <= 'Z')
+    else if(caractere >= 'A' && caractere <= 'Z')
         return caractere - 'A';
-    
     return -1;
 }
 
@@ -97,7 +96,7 @@ static int _retornar_indice_trie(char caractere) {
 */
 void trie_inserir_palavra(TRIE *trie, const char *palavra) {
     int tamanho_string = strlen(palavra);
-
+    
     NO *no_atual = trie->raiz;
     for(int i = 0; i < tamanho_string; ++i) {
         int indice = _retornar_indice_trie(palavra[i]);
@@ -120,7 +119,7 @@ void trie_inserir_palavra(TRIE *trie, const char *palavra) {
 */
 boolean trie_procurar_palavra(TRIE *trie, char *palavra) {
     int tamanho_string = strlen(palavra);
-
+    printf("%s\n", palavra);
     NO *no_atual = trie->raiz;
     for(int i = 0; i < tamanho_string; ++i) {
         int indice = _retornar_indice_trie(palavra[i]);

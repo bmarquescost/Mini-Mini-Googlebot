@@ -16,8 +16,4 @@ void printar_lista_encontrada(LISTA_SITES *sites_encontrados);
 int lista_sites_consulta_num_sites(LISTA_SITES *l);
 WEBSITE **lista_sites_retorna_websites(LISTA_SITES *lista);
 
-// Segunda função
-// TRIE *construir_trie_com_lista_sites(LISTA_SITES *l);
-
-
 #endif
