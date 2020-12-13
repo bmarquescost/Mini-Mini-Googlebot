@@ -119,7 +119,6 @@ void trie_inserir_palavra(TRIE *trie, const char *palavra) {
 */
 boolean trie_procurar_palavra(TRIE *trie, char *palavra) {
     int tamanho_string = strlen(palavra);
-    printf("%s\n", palavra);
     NO *no_atual = trie->raiz;
     for(int i = 0; i < tamanho_string; ++i) {
         int indice = _retornar_indice_trie(palavra[i]);
