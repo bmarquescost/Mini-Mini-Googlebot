@@ -281,6 +281,11 @@ void carrega_dados_csv(AVL *arvore) {
     free(nome_arquivo_csv);    
 }
 
+/*
+    Função busca_palavra:
+    Realiza a busca de uma palavra-chave(recebida dentro da função) em uma AVL, printando depois quais sites
+    da AVL contém aquela palavra-chave.
+*/
 void buscar_palavra(AVL *arvore) {
     printf("\n+-------------------------------------------+\n");
     printf("|  BUSCAR PALAVRA-CHAVE NA LISTA DE SITES   |\n");
@@ -302,6 +307,12 @@ void buscar_palavra(AVL *arvore) {
     free(palavra_buscada);
 }
 
+/*
+    Função sugerir_site:
+    Realiza a busca de uma palavra-chave(recebida dentro d função) em uma AVL, cria uma lista dos sites que contém
+    essa plavra-chave, cria uma trie com todas as palavras-chave que esses sites contém, cria uma lista com os sites que
+    contém pelo menos uma palavra-chave da trie e printa essa lista caso ela contenha mais de um site
+*/
 void sugerir_sites(AVL *arvore) {
     printf("\n+-------------------------------------------+\n");
     printf("|                 SUGERIR SITES             |\n");
