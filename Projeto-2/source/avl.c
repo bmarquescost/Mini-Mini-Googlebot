@@ -11,7 +11,6 @@
 #define FALSE 0
 
 typedef struct _no NO;
-typedef struct _avl AVL;
 
 #define _max(a,b) (a >= b ? a : b)
 
@@ -151,7 +150,7 @@ static NO *_avl_inserir_recursiva(NO *raiz, WEBSITE *novo_site, int *inseriu) {
         }
     }
 
-    raiz->altura = _max(_avl_altura_no(raiz->esquerda), _avl_altura_no(raiz->direita));
+    raiz->altura = _max(_avl_altura_no(raiz->esquerda), _avl_altura_no(raiz->direita)) + 1;
 
     return raiz;
 }
