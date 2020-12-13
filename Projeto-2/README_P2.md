@@ -38,17 +38,15 @@ Finalmente, voltaremos para a estrutura que armazena todos os sites do programa,
 
 Ordenaremos a lista de sites com o algoritmo de ordenação heapsort.
 
-**O.B.S**: algumas questões sobre a complexidade desta funcionalidade. 
+**O.B.S**: algumas questões sobre a complexidade desta funcionalidade (considerando n como o número de sites obtidas no programa):
 
-Considerando n como o número de sites obtidas no programa:
+- Devemos primeiramente percorrer toda a árvore, para verificar se o site contem à palavra chave inicialmente fornecida - complexidade O(n). A criação da lista de sites e a inserção desordenada possui complexidade O(1).
 
-devemos primeiramente percorrer toda a árvore, para verificar se o site contem à palavra chave inicialmente fornecida - complexidade O(n). A criação da lista de sites e a inserção desordenada possui complexidade O(1).
+- A partir da lista de sites completa, construiremos a trie: percorreremos na lista cada site e acessamos cada uma de suas palavras chave, inserindo-a na trie, o que resulta em uma complexidade (no pior caso de 10 palavras chave em todos os n sites) 10nc operações, sendo c o tamanho da palavra chave.
 
-A partir da lista de sites completa, construiremos a trie: percorreremos na lista cada site e acessamos cada uma de suas palavras chave, inserindo-a na trie, o que resulta em uma complexidade (no pior caso de 10 palavras chave em todos os n sites) 10nc operações, sendo c o tamanho da palavra chave.
+- Em seguida, para cada nó na árvore, verificaremos para cada palavra-chave deste site, se ela está presente na trie: complexidade (no pior caso todos os sites com 10 palavras chave) 10nc, sendo c o tamanho da maior palavra entre todas as palavras chave da estrutura trie. 
 
-Em seguida, para cada nó na árvore, verificaremos para cada palavra-chave deste site, se ela está presente na trie: complexidade (no pior caso todos os sites com 10 palavras chave) 10nc, sendo c o tamanho da maior palavra entre todas as palavras chave da estrutura trie. 
-
-Ordenação com algoritmo heapsort de complexidade O(nlog(n))
+- Ordenação com algoritmo heapsort de complexidade O(nlog(n))
 
 ## **Estruturas de Dados utilizada no decorrer do projeto:** 
 ### AVL:
