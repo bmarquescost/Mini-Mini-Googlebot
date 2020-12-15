@@ -1,8 +1,24 @@
 1,spotify,870,https://www.spotify.com/br/,musica,volume,festa,curticao
-3,youtube,920,https://www.youtube.com,videos,youtubers,curitdas,sininho,deixa o like
+3,youtube,920,https://www.youtube.com,videos,youtubers,curtidas,sininho,deixa,like
 10,instagram,860,https://www.instagram.com/,fotos,likes,sigodevolta,blogueirah
-2,facebook,820,https://www.facebook.com/,azul,familia tradicional,mark zuckerberg
-4,twitter,950,https://www.twitter.com.br/,passarinho azul,desabafo,exposed,cancelamento,hashtag
-6,twitch,800,https://www.twitch.tv/,streamer,csgo,league of legends,entretenimento,followers,subscribe,pontos,roxo,campeonatos,ligas
-7,github,10000,https://github.com,desenvolvimento,opensource,compartilhamento,comunidade,commit,add,push,pull,pull request
-10,notion,999,https://notion.so,organização pessoal,calendario,notebook,recomendo
+2,facebook,820,https://www.facebook.com/,azul,familia,tradicional,mark,zuckerberg
+4,twitter,950,https://www.twitter.com.br/,passarinho,azul,desabafo,exposed,cancelamento,hashtag
+6,twitch,800,https://www.twitch.tv/,streamer,csgo,league,legends,entretenimento,followers,subscribe,pontos,roxo,campeonatos,ligas
+7,github,10000,https://github.com,desenvolvimento,opensource,compartilhamento,comunidade,commit,add,push,pull,pull,request,tecnologia
+10,notion,999,https://notion.so,organizacao,pessoal,calendario,notebook,recomendo
+12,samsung,701,https://www.samsung.com/br/,tecnologia,celular,relogio,tv,som,video,produtos,empreendimento,empresa
+49,riot,32,https://riotgames.com,league,legends,jogos,valorant,runeterra,skins,rei,destruido
+81,tidia,567,https://ae4.tidia-ae.usp.br/portal,portal,tidia,alunos,usp,docentes,notas,atividades,provas
+67,moodle,612,https://edisciplinas.usp.br,portal,alunos,usp,docentes,notas,atividades,simulados,provas
+48,jupiterweb,320,https://uspdigital.usp.br,portal,usp,rede,graduacao,certificado
+14,xiaomi,721,https://mi.com.br,xiaomi,celulares,rede,redmi,pulseira,relogio,smartwatch,concorrencia,tecnologia
+41,shein,589,https://br.shein.com,anuncio,instagram,roupas,moda,masculino,feminino,unissex
+68,zoom,870,https://zoom.com.br,comparador,precos,blackfriday,compras,kabum,fiscal
+834,kabum,867,https://kabum.com.br,sorteio,computadores,gamer,precos,zoom,blackfraude,tecnologia
+567,discord,999,https://discord.com,amigos,redes,social,ligacao,chamadas,video,gaming,comunicacao
+891,mercado livre,676,https://mercadolivre.com.br,amarelo,precos,venda,usados,atacado,varejo,barato,golpe
+344,wikipedia,679,https://wikipedia.com.br,enciclopedia,livre,resumos,conhecimento,branco,informacao
+143,reclame-aqui,791,https://reclameaqui.com.br,reclamacoes,troca,sites,confiaveis,atendimento,seguranca
+214,netflix,893,https://netflix.com,vermelho,filme,chill,serie,originais,conforto,acessibilidade
+234,amazon prime video,821,https://primevideo.com,amazon,streaming,videos,filme,series,barato,acessibilidade
+78,microsoft store,741,https://microsoft.com/pt-br/store,produtos,microsoft,windows,azure,jogos,gaming,aplicativos

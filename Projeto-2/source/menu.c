@@ -307,7 +307,7 @@ void buscar_palavra(AVL *arvore) {
     lista_sites_ordenar(sites_encontrados);
 
     printf("\nOs sites encontradados com a palavra-chave '%s' foram:\n", palavra_buscada);
-    printar_lista_encontrada(sites_encontrados);
+    printar_lista_encontrada(sites_encontrados, lista_sites_consulta_num_sites(sites_encontrados));
     
     lista_sites_deletar(&sites_encontrados);
 
@@ -345,7 +345,10 @@ void sugerir_sites(AVL *arvore) {
     lista_sites_ordenar(sugestoes);
 
     printf("\nA seguir, temos os sites sugeridos a partir da palavra-chave '%s'\n", palavra_chave_inicial);
-    printar_lista_encontrada(sugestoes);
+    
+    int num_sites = lista_sites_consulta_num_sites(sugestoes);
+    num_sites = num_sites > NUMERO_SUGESTOES ? NUMERO_SUGESTOES : num_sites;
+    printar_lista_encontrada(sugestoes, num_sites);
 
     trie_deletar(&palavras_chave);
     lista_sites_deletar(&sites_com_palavra_chave);

@@ -18,4 +18,4 @@ run:
 	@$(BINARY)
 
 zip:
-	zip -r Minigooglebot ./source $(INCLUDE) $(MAIN) Makefile README.md
+	zip -r Mini-googlebot ./source $(INCLUDE) $(MAIN) Makefile README_P2.md googlebot.txt

@@ -72,16 +72,16 @@ int lista_sites_consulta_num_sites(LISTA_SITES *l) {
     Função printar_lista_encontrada:
     Função que printa os sites encontrados, mostrando o nome de cada site, sua relevância e sua URL
 */
-void printar_lista_encontrada(LISTA_SITES *sites_encontrados){
+void printar_lista_encontrada(LISTA_SITES *sites_encontrados, int num_sites){
     if(sites_encontrados == NULL) return;
 
     if(sites_encontrados->qtd_sites == 0 || sites_encontrados->sites == NULL) 
         return;
     
     printf("\n+---------------------------------------------------------------+\n");
-    for(int i = 0; i < sites_encontrados->qtd_sites ; ++i) {
-        printf("| [%d] %s\n", i, website_consulta_nome(sites_encontrados->sites[i]));
-        printf("|\tRelevância: %d \n|\tURL: %s\n",  website_consulta_relevancia(sites_encontrados->sites[i]), website_consulta_url(sites_encontrados->sites[i]));
+    for(int i = 0; i < num_sites ; ++i) {
+        printf("| [%d] Nome: %s\n", i, website_consulta_nome(sites_encontrados->sites[i]));
+        printf("|     URL: %s\n", website_consulta_url(sites_encontrados->sites[i]));
         if(i + 1 != sites_encontrados->qtd_sites) printf("|\n");
     }
     
